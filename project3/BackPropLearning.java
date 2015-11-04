@@ -127,8 +127,26 @@ public class BackPropLearning
 						}
 						network.setInputWeights(input, wI);
 					}
+					network.calcAct(inputN, layer1[j], j);
 					
 				}
+				
+				// loop to forward input layer information to hidden layer to update hidden weights
+				for (int j = 0; j < outputN.length; j++)
+				{
+					float in = 0;
+					float wL[] = new float [layer1.length];
+					for (int k = 0; k < layer1.length; k++)
+					{
+						float w[] = layer1[k].getWeight();
+						in = in + layer1[k].getOutput()*w[j];
+					}
+					delta_i[j] = sigDerive(in)*(examples[i][examples[i].length-1] - outputN[j].getOutput());
+					for (int l = 0; l < wL.length; l++)
+					{
+						wL[l] = wL[l] + learn_rate*layer1[l].getOutput()*delta_i[j];
+					}
+				}	
 			}
 		}
 		

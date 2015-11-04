@@ -290,7 +290,7 @@ public class Network
 	}
 	
 	// calcAct used by first hidden layer 
-	private void calcAct(INode[] preLayer, HNode curNode, int index)
+	public void calcAct(INode[] preLayer, HNode curNode, int index)
 	{
 		float sum = 0;
 		for (int i = 0; i < preLayer.length; i++)
